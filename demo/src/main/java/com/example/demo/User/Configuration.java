@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -45,8 +44,8 @@ public class Configuration {
     }
 
 
-   //加载redis连接池属性
-    @Bean
+   //加载redis连接池属性   因为本地并未配置redis集群，在这里取消@Bean，先不向容器中注入
+   // @Bean
     @ConfigurationProperties(prefix = "spring.redis.lettuce.pool")
     public GenericObjectPoolConfig genericObjectPoolConfig( ){
 
@@ -65,7 +64,7 @@ public class Configuration {
     }
 
     //redis集群配置   RedisProperties这个类已经帮我们加载了配置文件的配置（集群节点、最大连接数之类）
-    @Bean
+   // @Bean
     public RedisClusterConfiguration redisClusterConfiguration(RedisProperties redisProperties){
         RedisClusterConfiguration redisClusterConfiguration
                 = new RedisClusterConfiguration(redisProperties.getCluster().getNodes());
@@ -76,7 +75,7 @@ public class Configuration {
 
 
     //redis连接工厂，他里边装了结合了redis集群配置，和LettucePoolingClientConfiguration连接池的配置
-    @Bean
+  //  @Bean
     public RedisConnectionFactory redisConnectionFactory(RedisClusterConfiguration redisClusterConfiguration){
 
         LettuceClientConfiguration clientConfig = LettucePoolingClientConfiguration.builder()
@@ -95,7 +94,7 @@ public class Configuration {
      * @param redisConnectionFactory
      * @return
      */
-    @Bean
+   // @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
 
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
@@ -123,8 +122,8 @@ public class Configuration {
         return redisTemplate;
     }
 
-    @Bean
-    @Qualifier
+  //  @Bean
+  //  @Qualifier
     public KeyGenerator wiselyKeyGenerator() {
         return new KeyGenerator() {
             @Override
@@ -140,7 +139,7 @@ public class Configuration {
         };
     }
 
-    @Bean
+  //  @Bean
     public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory);
         Jackson2JsonRedisSerializer<?> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
