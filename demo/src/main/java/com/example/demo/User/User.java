@@ -6,6 +6,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.Objects;
 
 public class User  implements InitializingBean {
 
@@ -54,6 +55,18 @@ public class User  implements InitializingBean {
         log.info("bean对象的销毁方法----------------------");
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(log, user.log) &&
+                Objects.equals(getName(), user.getName()) &&
+                Objects.equals(getAge(), user.getAge());
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(log, getName(), getAge());
+    }
 }
