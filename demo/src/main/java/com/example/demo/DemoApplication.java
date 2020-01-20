@@ -46,7 +46,7 @@ public class DemoApplication {
                 );
 
 
-
+        log.info("测试git的dev分支！");
         log.info("我是springboot启动类------run 后 ----------");
         String s = RandomStringUtils.randomAlphanumeric(6);
         String random = RandomStringUtils.random(6);
