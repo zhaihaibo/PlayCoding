@@ -27,9 +27,9 @@ public class UserController {
         User user = SpringApplicationUtil.getBean(User.class);
         User user1 = (User)SpringApplicationUtil.getBean("user");
         logger.info(user.toString()+"--------------------------------->");
+
         return RtnResult.success(users) ;
     }
-
     @GetMapping("getOneById/{id}")
     public RtnResult getOneById(@PathVariable Integer id){
         User userById = userService.getUserById(id);

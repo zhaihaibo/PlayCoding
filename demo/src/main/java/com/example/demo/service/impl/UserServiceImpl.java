@@ -4,12 +4,15 @@ import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class UserServiceImpl implements UserService {
+
 
     @Autowired
     UserMapper userMapper;
@@ -19,6 +22,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectAll();
     }
 
+    @Cacheable(cacheNames = {"emp"})   //当前查询运用了缓存
     @Override
     public User getUserById(Integer id) {
         User user = userMapper.selectByPrimaryKey(id);

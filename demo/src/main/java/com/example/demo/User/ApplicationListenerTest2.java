@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
+//@Component
 public class ApplicationListenerTest2 implements ApplicationListener<ContextRefreshedEvent> {
 
     private final Logger log = LoggerFactory.getLogger(ApplicationListenerTest2.class);
@@ -22,6 +22,8 @@ public class ApplicationListenerTest2 implements ApplicationListener<ContextRefr
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+
+
 
         log.info("spring容器加载完成后，执行监听器的ContextRefreshedEvent事件操作---------------------------");
 
@@ -62,7 +64,7 @@ public class ApplicationListenerTest2 implements ApplicationListener<ContextRefr
 //        System.out.println(user2);
 //        System.out.println(user2.getName());
 
-        redisTemplate.opsForValue().set("123",456,60L, TimeUnit.SECONDS);
+//        redisTemplate.opsForValue().set("123",456,60L, TimeUnit.SECONDS);
         log.info("监听器在所有对象加入容器之后在redis集群中添加了值 -----------------------"+redisTemplate.opsForValue().get("123"));
 
     }

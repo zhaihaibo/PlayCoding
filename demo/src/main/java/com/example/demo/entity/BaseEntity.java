@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
-public class BaseEntity  {
+import java.io.Serializable;
+
+public class BaseEntity implements Serializable {
     private String createTime;
 
     public BaseEntity(String createTime) {

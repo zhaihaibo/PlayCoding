@@ -39,8 +39,8 @@ public class ThreadController {
 
         Integer i1 = 200;
         Integer i2 = 200;
-        boolean b=  i1==i2;
-        logger.info("Integer 100 == Integer 100 true or false? ================>" +b);
+        boolean b = i1 == i2;
+        logger.info("Integer 100 == Integer 100 true or false? ================>" + b);
 
         long l2 = System.currentTimeMillis();
         System.out.println("使用for循环消耗的时间是------------》：" + (l2 - l1));
@@ -95,7 +95,7 @@ public class ThreadController {
                 break;
             }
         }
-            return  RtnResult.success();
-        }
+        return RtnResult.success();
+    }
 
 }

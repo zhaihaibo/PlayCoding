@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import tk.mybatis.spring.annotation.MapperScan;
 
@@ -15,13 +17,16 @@ import java.net.InetAddress;
 //如果没有不想要数据库，可以加上排除数据库操作
 //@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @SpringBootApplication
-@EnableScheduling
+@EnableScheduling  //开启定时任务
+@EnableCaching  //开启缓存
+@EnableAsync // 开启异步任务
 @MapperScan(basePackages = {"com.example.demo.mapper"})
 public class DemoApplication {
 
     private final static Logger log = LoggerFactory.getLogger(DemoApplication.class);
 
     public static void main(String[] args) {
+
 
 
 
