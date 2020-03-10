@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 @RestController
 public class UserController {
@@ -20,7 +21,9 @@ public class UserController {
 
 
     @GetMapping(value = "get/all")
-    public RtnResult getAll(){
+    public RtnResult getAll(HttpSession session){
+        User user2 = (User) session.getAttribute("user");
+        logger.info(user2+"**************");
         List<User> users = userService.getAll();
         ApplicationContext applicationContext = SpringApplicationUtil.getApplicationContext();
 

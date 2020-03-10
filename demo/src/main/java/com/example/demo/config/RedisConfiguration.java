@@ -22,7 +22,9 @@ import java.time.Duration;
 @data 2020/3/3 - 13:52
 */
 @Configuration
-public class MyConfiguration {
+public class RedisConfiguration  {
+
+
 
 //    RedisCacheConfiguration
     //配置自定义序列化方式
